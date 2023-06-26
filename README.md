@@ -1,69 +1,95 @@
-# Employee Stock Option Plan Smart Contract Challenge
+# Employee Stock Option Plan (ESOP) Smart Contract
 
-## Task
-You are tasked with designing and implementing a smart contract for an Employee Stock Option Plan (ESOP) on the Ethereum blockchain. The ESOP allows a company to grant stock options to its employees, define vesting schedules, and enable employees to exercise their vested options. Your goal is to create a secure, efficient, and user-friendly smart contract, named `EmployeeStockOptionPlan`, that manages the ESOP.
+This repository contains a Solidity smart contract for managing an Employee Stock Option Plan (ESOP) on the Ethereum blockchain.
 
-## Smart Contract Specifications
-- Smart Contract Language: Solidity (version 0.8.0 or higher)
-- Blockchain Platform: Ethereum
+## Smart Contract Overview
 
-## Employee Stock Option Plan Functionality
-Implement the following functionalities in the `EmployeeStockOptionPlan` smart contract:
+The `EmployeeStockOptionPlan.sol` file contains the implementation of the `EmployeeStockOptionPlan` smart contract. It allows a company to grant stock options to employees, define vesting schedules, enable employees to exercise their vested options, and track vested and exercised options.
 
-### 3.1. Granting Stock Options
-- Implement a function, `grantStockOptions`, that allows the company (contract owner) to grant stock options to an employee by specifying their address and the number of options.
-- Emit an event, `StockOptionsGranted`, to log the grant of stock options.
+## Requirements
 
-### 3.2. Vesting Schedule
-- Implement a function, `setVestingSchedule`, that allows the company to set the vesting schedule for an employee's options.
+- Solidity compiler (version 0.8.0 or higher)
+- Ethereum development environment (e.g., Remix, Truffle, Hardhat)
+- An Ethereum network or local blockchain for deployment and testing
 
-### 3.3. Exercising Options
-- Implement a function, `exerciseOptions`, that allows an employee to exercise their vested options.
+## Setup
 
-### 3.4. Tracking Vested and Exercised Options
-- Implement functions, `getVestedOptions` and `getExercisedOptions`, to retrieve the number of vested and exercised options for an employee.
+1. Clone this repository:
+git clone https://github.com/your-username/employee-stock-option-plan.git
+cd employee-stock-option-plan
 
-### 3.5. Security and Permissions
-- Implement appropriate access control to ensure that only authorized employees can exercise their options.
+2. Install dependencies (if any) and set up your Ethereum development environment.
 
-### 3.6. Ownership and Transferability
-- Implement a function, `transferOptions`, that allows employees to transfer their vested options to other eligible employees, subject to any transfer restrictions specified in the vesting schedule.
+3. Open the `EmployeeStockOptionPlan.sol` file in your preferred development environment.
 
-## Your Task
-Design and implement the `EmployeeStockOptionPlan` smart contract based on the provided skeleton code in the file `EmployeeStockOptionPlan.sol`. Your implementation should fulfill the following requirements:
+4. Compile the smart contract using the Solidity compiler.
 
-### 4.1. Functionality
-The smart contract should correctly handle the granting of stock options, setting of vesting schedules, exercising of options, and tracking of vested and exercised options.
+## Deployment
 
-### 4.2. Security
-Ensure the smart contract follows best practices for security, including protection against common attacks like reentrancy, overflow/underflow, and unauthorized access.
+1. Deploy the `EmployeeStockOptionPlan` contract to an Ethereum network or local blockchain using your chosen development environment.
 
-### 4.3. Documentation
-Include comprehensive documentation that explains the design decisions, contract architecture, and usage instructions. Code comments should be provided where necessary to improve code readability and maintainability.
+2. Take note of the deployed contract address, as it will be needed for interacting with the smart contract.
 
-Use the provided skeleton code in the file `EmployeeStockOptionPlan.sol` as a starting point for your implementation. Feel free to modify and expand the code as needed to fulfill the requirements.
+## Usage
 
-## Evaluation Criteria
-Your solution will be evaluated based on the following criteria:
+The following sections provide examples of how to interact with the `EmployeeStockOptionPlan` smart contract using the provided functions.
 
-### 5.1. Correctness
-The smart contract should implement the specified functionality accurately and without any critical bugs.
+### Grant Stock Options
 
-### 5.2. Documentation
-Include comprehensive documentation that explains the design decisions, contract architecture, and usage instructions. Code comments should be provided where necessary to improve code readability and maintainability.
+To grant stock options to an employee, call the `grantStockOptions` function with the employee's address and the number of options:
 
-Please note that the provided skeleton code is a starting point and may require further modifications and additions based on your implementation strategy and requirements.
+```solidity
+function grantStockOptions(address employee, uint256 options) external onlyOwner
 
-## Submission Guidelines
-Please follow the below guidelines for your submission:
+### Set Vesting Schedule
+To set the vesting schedule for an employee's options, call the setVestingSchedule function with the employee's address, total options, vesting duration, cliff duration, and transferability:
 
-1. Fork this repository.
-2. Create a new branch for your solution.
-3. Implement your solution in the file `EmployeeStockOptionPlan.sol`.
-4. Provide the required documentation and instructions.
-5. Commit and push your changes to your forked repository.
-6. Submit a pull request (PR) to this repository.
+function setVestingSchedule(
+    address employee,
+    uint256 totalOptions,
+    uint256 vestingDuration,
+    uint256 cliffDuration,
+    bool transferable
+) external onlyOwner
 
-Please make sure to include all the necessary files and information in your submission.
 
-Good luck with your implementation! If you have any questions, feel free to ask.
+### Exercise Options
+To exercise vested options, call the exerciseOptions function with the number of options to be exercised:
+
+```
+function exerciseOptions(uint256 options) external onlyEmployee
+```
+
+### Tracking Vested and Exercised Options
+
+To retrieve the number of vested or exercised options for an employee, use the following functions:
+
+```
+function getVestedOptions(address employee) public view returns (uint256)
+function getExercisedOptions(address employee) public view returns (uint256)
+
+```
+
+### Transfer Options
+To transfer vested options to another eligible employee, call the transferOptions function wit
+
+```
+function transferOptions(address to, uint256 options) external onlyEmployee
+```
+
+### Security Considerations
+
+- Ensure that only the contract owner can grant stock options and set vesting schedules by using the onlyOwner modifier.
+- Protect against unauthorized access by using the onlyEmployee modifier for functions that can only be called by eligible employees.
+- Validate inputs to prevent invalid values and potential security vulnerabilities.
+- Implement appropriate access control mechanisms to protect sensitive functions and data.
+- Consider additional security measures like input validation, protection against reentrancy, and safeguarding against overflow/underflow.
+
+
+### Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvement, please submit a pull request or open an issue on the GitHub repository.
+
+License
+This project is licensed under the MIT License.
+
+
