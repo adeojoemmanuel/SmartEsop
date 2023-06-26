@@ -40,8 +40,10 @@ To grant stock options to an employee, call the `grantStockOptions` function wit
 
 ```solidity
 function grantStockOptions(address employee, uint256 options) external onlyOwner
+```
 
 ### Set Vesting Schedule
+
 To set the vesting schedule for an employee's options, call the setVestingSchedule function with the employee's address, total options, vesting duration, cliff duration, and transferability:
 
 function setVestingSchedule(
