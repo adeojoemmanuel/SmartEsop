@@ -15,7 +15,7 @@ The `EmployeeStockOptionPlan.sol` file contains the implementation of the `Emplo
 ## Setup
 
 1. Clone this repository:
-git clone https://github.com/your-username/employee-stock-option-plan.git
+git clone https://github.com/adeojoemmanuel/SmartEsop.git
 cd employee-stock-option-plan
 
 2. Install dependencies (if any) and set up your Ethereum development environment.
